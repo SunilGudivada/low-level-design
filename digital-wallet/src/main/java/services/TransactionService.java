@@ -37,6 +37,12 @@ public class TransactionService {
         fromUser.getWallet().debitAmount(amount);
         toUser.getWallet().creditAmount(amount);
 
+        OfferService offerService = new OfferService(db);
+
+        if(offerService.checkIsActive()){
+            offerService.applyOffer1(from, to);
+        }
+
         this.addTransaction(fromUser, toUser, TransactionType.DEBIT, amount);
         this.addTransaction(toUser, fromUser, TransactionType.CREDIT, amount);
 
@@ -51,7 +57,7 @@ public class TransactionService {
      * @param name username
      */
     public void Statement(String name){
-        System.out.println("\n Statement for "+name);
+        System.out.println("\nStatement for "+name);
         for(Transaction transaction : db.userDB.get(name).getWallet().getTransactions()){
             String transactionType  = TransactionType.CREDIT == transaction.getTransactionType() ? "credit" : "debit";
             System.out.println(transaction.getUser().getName()+" "+transactionType +" " +transaction.getAmount());

@@ -19,4 +19,9 @@ public class User {
        this.wallet = new Wallet(this, amount);
     }
 
+    public String toString(){
+
+        return this.name + " "+this.getWallet().getBalance();
+    }
+
 }

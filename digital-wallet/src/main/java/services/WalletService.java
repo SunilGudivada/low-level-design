@@ -35,7 +35,7 @@ public class WalletService {
      * Print the current state of the users in the system.
      */
     public void overview(){
-        System.out.println("Overview:::: ");
+        System.out.println("\nOverview:::: ");
         for(User user : this.db.userDB.values()){
             System.out.println(user.getName()+" "+user.getWallet().getBalance());
         }
